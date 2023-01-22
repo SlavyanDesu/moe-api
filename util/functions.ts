@@ -18,7 +18,7 @@ const endpoints = {
  * @returns {RegExpMatchArray | null} An Array whose contents depend on the presence or absence of the global (g) flag, or `null` if no matches are found.
  */
 export function isUrl(url: string): RegExpMatchArray | null {
-  return url.match(new RegExp(/(?:((?:https|http):\/\/)|(?:\/)).+(?:.mp3|mp4|gif)/gmi))
+  return url.match(new RegExp(/(?:((?:https|http):\/\/)|(?:\/)).+(?:.jpg|jpeg|png|mp4|gif)/gmi))
 }
 
 /**
