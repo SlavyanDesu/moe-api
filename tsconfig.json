@@ -1,0 +1,21 @@
+{
+  "ts-node": {
+    "transpileOnly": true,
+    "compilerOptions": {
+      "useUnknownInCatchVariables": true
+    }
+  },
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ES2022",
+    "moduleResolution": "NodeNext",
+    "strict": true,
+    "esModuleInterop": true,
+    "useUnknownInCatchVariables": true,
+    "declaration": true,
+    "declarationDir": "./dist/@types",
+    "isolatedModules": true,
+    "outDir": "./dist/esm"
+  },
+  "include": ["*.ts"]
+}

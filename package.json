@@ -1,0 +1,31 @@
+{
+  "name": "trace.moe-wrapper",
+  "version": "0.0.1",
+  "description": "Search anime scene using trace.moe API.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "anime",
+    "trace.moe",
+    "API",
+    "wrapper"
+  ],
+  "author": "SlavyanDesu",
+  "license": "MIT",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.48.2",
+    "@typescript-eslint/parser": "^5.48.2",
+    "eslint": "^8.32.0",
+    "rimraf": "^4.1.1",
+    "ts-node": "^10.9.1",
+    "tsconfig-to-dual-package": "^1.1.1",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "axios": "^1.2.3",
+    "form-data": "^4.0.0"
+  }
+}
