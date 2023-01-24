@@ -1,5 +1,5 @@
 import type { Options, Result } from './utils/interface.js'
-import { traceByMediaUrl } from './utils/fetcher.js'
+import { traceByMediaUpload, traceByMediaUrl } from './utils/fetcher.js'
 
 export default class TraceMoe {
   options: Options
@@ -18,11 +18,15 @@ export default class TraceMoe {
   async traceByUrl(url: string): Promise<Result | string | undefined> {
     return await traceByMediaUrl(url, this.options.cutBorders, this.options.anilistInfo, this.options.size, this.options.mute, this.options.apiKey)
   }
+
+  async traceByFile(filePath: string): Promise< Result | string | undefined > {
+    return await traceByMediaUpload(filePath, this.options.cutBorders, this.options.anilistInfo, this.options.size, this.options.mute, this.options.apiKey)
+  }
 }
 
-const moe = new TraceMoe({ cutBorders: true, size: 2, anilistInfo: false })
+const moe = new TraceMoe({ cutBorders: true, size: 2, anilistInfo: true })
 async function test() {
-  return console.log(await moe.traceByUrl('https://images.plurk.com/32B15UXxymfSMwKGTObY5e.jpg'))
+  return console.log(await moe.traceByFile('./media/test.jpg'))
 }
 
 test()

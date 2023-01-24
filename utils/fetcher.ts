@@ -3,7 +3,7 @@ import axios from 'axios'
 import fs from 'fs'
 import path from 'path'
 import type { Result, ResultDataWithAnilist, ResultData } from './interface.js'
-import { baseUrl, endpoints, params, __dirname } from './variables.js'
+import { baseUrl, endpoints, params } from './variables.js'
 
 export function numberToQuality(number: number | undefined): string {
   switch(number) {
@@ -122,11 +122,13 @@ export async function traceByMediaUrl(url: string, cutBorders: boolean | undefin
 }
 
 
-export async function traceByMediaUpload(filePath: string): Promise<Result | string | undefined> {
-  const file = path.resolve(__dirname, filePath)
+export async function traceByMediaUpload(filePath: string, cutBorders: boolean | undefined, anilistInfo: boolean | undefined, size: number | undefined, mute: boolean | undefined, apiKey: string | undefined): Promise<Result | string | undefined> {
+  const file = path.join(path.resolve(process.cwd(), filePath || ''))
   if (fs.existsSync(file)) {
     try {
-      const response = await axios.post(baseUrl, fs.readFileSync(file))
+      const base = baseUrl + endpoints.search
+      const request = base + (cutBorders ? params.cutBorders : '') + (anilistInfo ? params.anilistInfo : '') + params.size + numberToQuality(size) + (mute ? params.mute : '') + (apiKey ? params.key + apiKey : '')
+      const response = await axios.post(request, fs.readFileSync(file))
       return traceIt(response)
     } catch (err) {
       console.error(err)
