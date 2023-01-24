@@ -5,7 +5,7 @@ import path from 'path'
 import type { Result, ResultDataWithAnilist, ResultData } from './interface.js'
 import { baseUrl, endpoints, params } from './variables.js'
 
-export function numberToQuality(number: number | undefined): string {
+function numberToQuality(number: number | undefined): string {
   switch(number) {
     case 0:
       return 's'
@@ -22,16 +22,16 @@ export function numberToQuality(number: number | undefined): string {
   }
 }
 
-export function isMediaUrl(url: string): RegExpMatchArray | null {
+function isMediaUrl(url: string): RegExpMatchArray | null {
   return url.match(new RegExp(/(?:((?:https|http):\/\/)|(?:\/)).+(?:.jpg|jpeg|png|mp4|gif)/gmi))
 }
 
-export function traceIt(response: any, withAnilistInfo = true): Result | string | undefined {
-  if (withAnilistInfo) {
-    const resultData: ResultDataWithAnilist[] = []
-    const { data } = response
-    const { frameCount, error, result } = data
-    if (!error) {
+function traceIt(response: any, withAnilistInfo = true): Result | string | undefined {
+  const { data } = response
+  const { frameCount, error, result } = data
+  if (!error) {
+    if (withAnilistInfo) {
+      const resultData: ResultDataWithAnilist[] = []
       for (let i = 0; i < result.length; i++) {
         const {
           anilist,
@@ -43,7 +43,7 @@ export function traceIt(response: any, withAnilistInfo = true): Result | string 
           video,
           image
         } = result[i]
-
+        
         resultData.push({
           anilist: anilist,
           filename: filename,
@@ -53,24 +53,17 @@ export function traceIt(response: any, withAnilistInfo = true): Result | string 
           similarity: similarity,
           video: video,
           image: image
-         })
+        })
       }
-
+      
       const obj: Result = {
         frameCount: frameCount,
         error: error,
         result: resultData
       }
-
       return obj
     } else {
-      return error
-    }
-  } else {
-    const resultData: ResultData[] = []
-    const { data } = response
-    const { frameCount, error, result } = data
-    if (!error) {
+      const resultData: ResultData[] = []
       for (let i = 0; i < result.length; i++) {
         const {
           filename,
@@ -81,7 +74,7 @@ export function traceIt(response: any, withAnilistInfo = true): Result | string 
           video,
           image
         } = result[i]
-
+        
         resultData.push({
           filename: filename,
           episode: episode,
@@ -90,19 +83,18 @@ export function traceIt(response: any, withAnilistInfo = true): Result | string 
           similarity: similarity,
           video: video,
           image: image
-         })
+        })
       }
-
+      
       const obj: Result = {
         frameCount: frameCount,
         error: error,
         result: resultData
       }
-
       return obj
-    } else {
-      return error
     }
+  } else {
+    return error
   }
 }
 
@@ -120,7 +112,6 @@ export async function traceByMediaUrl(url: string, cutBorders: boolean | undefin
     return 'URL not valid!'
   }
 }
-
 
 export async function traceByMediaUpload(filePath: string, cutBorders: boolean | undefined, anilistInfo: boolean | undefined, size: number | undefined, mute: boolean | undefined, apiKey: string | undefined): Promise<Result | string | undefined> {
   const file = path.join(path.resolve(process.cwd(), filePath || ''))
