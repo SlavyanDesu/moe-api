@@ -1,15 +1,5 @@
-export interface ResultDataWithAnilist {
-  anilist: object
-  filename: string
-  episode: number
-  from: number
-  to: number
-  similarity: number
-  video: string
-  image: string
-}
-
 export interface ResultData {
+  anilist?: object
   filename: string
   episode: number
   from: number
@@ -21,8 +11,8 @@ export interface ResultData {
 
 export interface Result {
   frameCount: number
-  error: string
-  result: ResultDataWithAnilist[] | ResultData[]
+  error: string | null
+  result: ResultData[]
 }
 
 export interface Options {
