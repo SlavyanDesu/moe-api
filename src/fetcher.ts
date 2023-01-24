@@ -4,7 +4,7 @@
 import axios, { AxiosResponse } from 'axios'
 import fs from 'fs'
 import path from 'path'
-import type { Options, Result, ResultData } from './interface.js'
+import type { Me, Options, Result, ResultData } from './interface.js'
 import { baseUrl, endpoints, params } from './constants.js'
 
 function numberToQuality(number: number): string {
@@ -93,4 +93,19 @@ export async function traceByMediaUpload(filePath: string, options: Options): Pr
   } else {
     return `${filePath} doesn't exist!`
   }
+}
+
+export async function me(apiKey?: string) {
+  let response = await axios.get(baseUrl + endpoints.me.split('?')[0])
+  if (apiKey) response = await axios.get(baseUrl + endpoints.me + params.key.split('&')[1] + apiKey)
+  const { data } = response
+  const { id, priority, concurrency, quota, quotaUsed } = data
+  const result: Me = {
+    id: id,
+    priority: priority,
+    concurrency: concurrency,
+    quota: quota,
+    quotaUsed: quotaUsed
+  }
+  return result
 }

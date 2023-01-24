@@ -22,3 +22,11 @@ export interface Options {
   mute?: boolean
   size?: number
 }
+
+export interface Me {
+  id: string
+  priority: number
+  concurrency: number
+  quota: number
+  quotaUsed: number
+}
