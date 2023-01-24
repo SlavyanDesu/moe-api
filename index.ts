@@ -16,17 +16,31 @@ export default class TraceMoe {
   }
 
   async traceByUrl(url: string): Promise<Result | string | undefined> {
-    return await traceByMediaUrl(url, this.options.cutBorders, this.options.anilistInfo, this.options.size, this.options.mute, this.options.apiKey)
+    return await traceByMediaUrl(
+      url,
+      this.options.cutBorders,
+      this.options.anilistInfo,
+      this.options.size,
+      this.options.mute, 
+      this.options.apiKey
+    )
   }
 
-  async traceByFile(filePath: string): Promise< Result | string | undefined > {
-    return await traceByMediaUpload(filePath, this.options.cutBorders, this.options.anilistInfo, this.options.size, this.options.mute, this.options.apiKey)
+  async traceByFile(filePath: string): Promise<Result | string | undefined> {
+    return await traceByMediaUpload(
+      filePath,
+      this.options.cutBorders,
+      this.options.anilistInfo,
+      this.options.size,
+      this.options.mute,
+      this.options.apiKey
+    )
   }
 }
 
 const moe = new TraceMoe({ cutBorders: true, size: 2, anilistInfo: true })
-async function test() {
-  return console.log(await moe.traceByFile('./media/test.jpg'))
+async function test(file: string) {
+  return console.log(await moe.traceByFile(file))
 }
 
-test()
+test('./media/test.jpg')
