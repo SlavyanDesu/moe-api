@@ -1,18 +1,13 @@
 {
   "ts-node": {
-    "transpileOnly": true,
-    "compilerOptions": {
-      "useUnknownInCatchVariables": true
-    }
+    "transpileOnly": true
   },
   "compilerOptions": {
     "target": "ES2020",
-    "module": "NodeNext",
+    "module": "ESNext",
     "moduleResolution": "NodeNext",
     "strict": true,
-    "sourceMap": true,
     "esModuleInterop": true,
-    "useUnknownInCatchVariables": true,
     "declaration": true,
     "declarationDir": "./dist/@types",
     "isolatedModules": true,

@@ -1,4 +1,4 @@
-import type { Options, Result } from './interface.js'
+import type { Me, Options, Result } from './interface.js'
 import { me, traceByMediaUpload, traceByMediaUrl } from './fetcher.js'
 
 export default class TraceMoe {
@@ -15,22 +15,29 @@ export default class TraceMoe {
     Object.assign(this.options, options)
   }
 
+  /**
+   * Trace anime source from media URL.
+   * @param {string} url - Media URL.
+   * @returns {Promise<Result | string>} Results from trace.moe API.
+   */
   async traceByUrl(url: string): Promise<Result | string> {
     return await traceByMediaUrl(url, this.options)
   }
 
-  async traceByFile(filePath: string): Promise<Result | string> {
+  /**
+   * Trace anime source from media.
+   * @param {string} filePath - File path.
+   * @returns {Promise<Result | string>} Results from trace.moe API.
+   */
+  async traceByMedia(filePath: string): Promise<Result | string> {
     return await traceByMediaUpload(filePath, this.options)
   }
 
-  async me(apiKey?: string) {
-    return await me(apiKey)
+  /**
+   * Check the search quota and limit for your account (with API key) or IP address (without API key).
+   * @returns {Promise<Me>} Your search quota and limit.
+   */
+  async me(): Promise<Me> {
+    return await me(this.options.apiKey)
   }
 }
-
-const moe = new TraceMoe({ cutBorders: true, size: 2, anilistInfo: true })
-async function test() {
-  return console.log(await moe.me())
-}
-
-test()

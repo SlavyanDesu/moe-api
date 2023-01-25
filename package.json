@@ -1,12 +1,35 @@
 {
   "name": "trace.moe-wrapper",
-  "version": "0.0.1",
+  "version": "0.2.1",
   "description": "Search anime scene using trace.moe API.",
-  "main": "index.js",
+  "main": "./dist/src/cjs/index.js",
+  "module": "./dist/src/esm/index.js",
+  "types": "./dist/@types/index.d.ts",
   "type": "module",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/@types/index.d.ts",
+        "default": "./dist/src/esm/index.js"
+      },
+      "require": {
+        "types": "./dist/@types/index.d.ts",
+        "default": "./dist/src/cjs/index.js"
+      },
+      "default": "./dist/src/cjs/index.js"
+    }
   },
+  "scripts": {
+    "build": "npm run clean && npm run build:esm && npm run build:cjs && tsconfig-to-dual-package",
+    "build:esm": "tsc -p tsconfig.json",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "clean": "rimraf dist",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "files": [
+    "dist"
+  ],
   "keywords": [
     "anime",
     "trace.moe",
