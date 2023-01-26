@@ -16,28 +16,28 @@ export default class TraceMoe {
   }
 
   /**
-   * Trace anime source from media URL.
+   * Trace anime source from given media URL.
    * @param {string} url - Media URL.
-   * @returns {Promise<Result | string>} Results from trace.moe API.
+   * @returns {Promise<Result | string>} Returns `Result` if source exists, `string` if `url` not valid, and `undefined` otherwise.
    */
-  async traceByUrl(url: string): Promise<Result | string> {
+  async traceByUrl(url: string): Promise<Result | string | undefined> {
     return await traceByMediaUrl(url, this.options)
   }
 
   /**
-   * Trace anime source from media.
+   * Trace anime source from given file.
    * @param {string} filePath - File path.
-   * @returns {Promise<Result | string>} Results from trace.moe API.
+   * @returns {Promise<Result | string>} Returns `Result` if source exists, `string` if `url` not valid, and `undefined` otherwise.
    */
-  async traceByMedia(filePath: string): Promise<Result | string> {
+  async traceByMedia(filePath: string): Promise<Result | string | undefined> {
     return await traceByMediaUpload(filePath, this.options)
   }
 
   /**
    * Check the search quota and limit for your account (with API key) or IP address (without API key).
-   * @returns {Promise<Me>} Your search quota and limit.
+   * @returns {Promise<Me | undefined>} Returns your search quota and limit.
    */
-  async me(): Promise<Me> {
+  async me(): Promise<Me | undefined> {
     return await me(this.options.apiKey)
   }
 }
