@@ -43,7 +43,9 @@
     "trace.moe",
     "API",
     "wrapper",
-    "image"
+    "image",
+    "image-finder",
+    "source-finder"
   ],
   "author": "SlavyanDesu",
   "license": "MIT",
