@@ -90,11 +90,11 @@ function traceIt(response: AxiosResponse): Result | undefined {
  * Get source from given media URL.
  * @param {string} url - Media URL.
  * @param {Options} options - Search options.
- * @returns {Promise<Result | string | undefined>} Returns `Result` if source exists, `string` if `url` not valid, and `undefined` otherwise.
+ * @returns {Promise<Result | undefined>} Returns `Result` if source exists, `undefined` otherwise.
  */
-export async function traceFromMediaUrl(url: string, options: Options): Promise<Result | string | undefined> {
+export async function traceFromMediaUrl(url: string, options: Options): Promise<Result | undefined> {
   try {
-    if (!isMediaUrl(url)) return `${url} is probably not a media URL!`
+    if (!isMediaUrl(url)) throw new Error(`${url} is probably not a media URL!`)
     const paramaters = combineParams(options.cutBorders!, options.anilistInfo!, options.size!, options.mute!, options.apiKey)
     const request = baseUrl + endpoints.search + params.url + url + paramaters
     const response = await axios.get(request)
@@ -108,12 +108,12 @@ export async function traceFromMediaUrl(url: string, options: Options): Promise<
  * Get source from given file.
  * @param {string} filePath - File path.
  * @param {Options} options - Search options.
- * @returns {Promise<Result | string | undefined>} Returns `Result` if source exists, `string` if `url` not valid, and `undefined` otherwise.
+ * @returns {Promise<Result | undefined>} Returns `Result` if source exists, `undefined` otherwise.
  */
-export async function traceFromFile(filePath: string, options: Options): Promise<Result | string | undefined> {
+export async function traceFromFile(filePath: string, options: Options): Promise<Result | undefined> {
   try {
     const file = path.join(path.resolve(process.cwd(), filePath || ''))
-    if (!fs.existsSync(file)) return `${filePath} doesn't exist!`
+    if (!fs.existsSync(file)) throw new Error(`${filePath} doesn't exist!`)
     const paramaters = combineParams(options.cutBorders!, options.anilistInfo!, options.size!, options.mute!, options.apiKey)
     const request = baseUrl + endpoints.search + paramaters.slice(1)
     const response = await axios.post(request, fs.readFileSync(file))
@@ -127,9 +127,9 @@ export async function traceFromFile(filePath: string, options: Options): Promise
  * Get source from Base64 string or data URL.
  * @param {string} base64 - Base64 string or data URL.
  * @param options - Search options.
- * @returns {Promise<Result | string | undefined>} Returns `Result` if source exists, `string` if `url` not valid, and `undefined` otherwise.
+ * @returns {Promise<Result | undefined>} Returns `Result` if source exists, `undefined` otherwise.
  */
-export async function traceFromBase64(base64: string, options: Options): Promise<Result | string | undefined> {
+export async function traceFromBase64(base64: string, options: Options): Promise<Result | undefined> {
   try {
     const paramaters = combineParams(options.cutBorders!, options.anilistInfo!, options.size!, options.mute!, options.apiKey)
     const request = baseUrl + endpoints.search + paramaters.slice(1)
