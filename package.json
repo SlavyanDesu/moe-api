@@ -30,11 +30,20 @@
   "files": [
     "dist"
   ],
+  "homepage": "https://github.com/SlavyanDesu/moe-api#readme",
+  "bugs": {
+    "url": "https://github.com/SlavyanDesu/moe-api/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SlavyanDesu/moe-api.git"
+  },
   "keywords": [
     "anime",
     "trace.moe",
     "API",
-    "wrapper"
+    "wrapper",
+    "image"
   ],
   "author": "SlavyanDesu",
   "license": "MIT",

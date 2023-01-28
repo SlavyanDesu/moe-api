@@ -1,5 +1,5 @@
 import type { Me, Options, Result } from './interface.js'
-import { me, traceFromFile, traceFromMediaUrl, traceFromBase64 } from './fetcher.js'
+import { me, traceFromMediaFile, traceFromMediaUrl, traceFromBase64 } from './fetcher.js'
 
 export default class TraceMoe {
   options: Options
@@ -16,7 +16,7 @@ export default class TraceMoe {
   }
 
   /**
-   * Trace anime source from given media URL.
+   * Get source from given media URL.
    * @param {string} url - Media URL.
    * @returns {Promise<Result | string>} Returns `Result` if source exists, `undefined` otherwise.
    */
@@ -25,12 +25,12 @@ export default class TraceMoe {
   }
 
   /**
-   * Trace anime source from given file.
+   * Get source from given file.
    * @param {string} filePath - File path.
    * @returns {Promise<Result | string>} Returns `Result` if source exists, `undefined` otherwise.
    */
-  async traceFromMedia(filePath: string): Promise<Result| undefined> {
-    return await traceFromFile(filePath, this.options)
+  async traceFromFile(filePath: string): Promise<Result| undefined> {
+    return await traceFromMediaFile(filePath, this.options)
   }
 
   /**

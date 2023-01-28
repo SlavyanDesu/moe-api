@@ -110,7 +110,7 @@ export async function traceFromMediaUrl(url: string, options: Options): Promise<
  * @param {Options} options - Search options.
  * @returns {Promise<Result | undefined>} Returns `Result` if source exists, `undefined` otherwise.
  */
-export async function traceFromFile(filePath: string, options: Options): Promise<Result | undefined> {
+export async function traceFromMediaFile(filePath: string, options: Options): Promise<Result | undefined> {
   try {
     const file = path.join(path.resolve(process.cwd(), filePath || ''))
     if (!fs.existsSync(file)) throw new Error(`${filePath} doesn't exist!`)
