@@ -28,7 +28,7 @@ const moe = new TraceMoe()
 ## Options
 ```js
 const moe = new TraceMoe({
-  apiKey: 'ABC'
+  apiKey: 'ABC',
   cutBorders: false,
   anilistInfo: true,
   mute: false,
