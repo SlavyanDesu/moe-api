@@ -76,4 +76,7 @@ Check the search quota and limit for your account (with API key) or IP address (
 For more info please check [trace.moe API docs](https://soruly.github.io/trace.moe-api/#/docs).
 
 ## License
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FSlavyanDesu%2Fmoe-api.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FSlavyanDesu%2Fmoe-api?ref=badge_large)
+**moe-api** © [SlavyanDesu](https://github.com/SlavyanDesu), released under the [MIT License](LICENSE). Authored and maintained by SlavyanDesu.
+<div align="center">
+  <a href="ttps://app.fossa.com/projects/git%2Bgithub.com%2FSlavyanDesu%2Fmoe-api?ref=badge_large"><img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2FSlavyanDesu%2Fmoe-api.svg?type=large" alt="Fossa Status">
+</div>
