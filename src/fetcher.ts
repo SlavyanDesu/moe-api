@@ -61,8 +61,8 @@ function traceIt(response: AxiosResponse): Result | undefined {
   try {
     const { data } = response
     const { frameCount, error, result } = data
-    const resultData: ResultData[] = []
     if (error) return error
+    const resultData: ResultData[] = []
     for (let i = 0; i < result.length; i++) {
       resultData.push({
         anilist: result[i].anilist,
@@ -92,18 +92,15 @@ function traceIt(response: AxiosResponse): Result | undefined {
  * @param {Options} options - Search options.
  * @returns {Promise<Result | string | undefined>} Returns `Result` if source exists, `string` if `url` not valid, and `undefined` otherwise.
  */
-export async function traceByMediaUrl(url: string, options: Options): Promise<Result | string | undefined> {
-  if (isMediaUrl(url)) {
-    try {
-      const paramaters = combineParams(options.cutBorders!, options.anilistInfo!, options.size!, options.mute!, options.apiKey)
-      const request = baseUrl + endpoints.search + params.url + url + paramaters
-      const response = await axios.get(request)
-      return traceIt(response)
-    } catch(err) {
-      console.error(err)
-    }
-  } else {
-    return `${url} is probably not a media URL!`
+export async function traceFromMediaUrl(url: string, options: Options): Promise<Result | string | undefined> {
+  try {
+    if (!isMediaUrl(url)) return `${url} is probably not a media URL!`
+    const paramaters = combineParams(options.cutBorders!, options.anilistInfo!, options.size!, options.mute!, options.apiKey)
+    const request = baseUrl + endpoints.search + params.url + url + paramaters
+    const response = await axios.get(request)
+    return traceIt(response)
+  } catch (err) {
+    console.error(err)
   }
 }
 
@@ -113,19 +110,34 @@ export async function traceByMediaUrl(url: string, options: Options): Promise<Re
  * @param {Options} options - Search options.
  * @returns {Promise<Result | string | undefined>} Returns `Result` if source exists, `string` if `url` not valid, and `undefined` otherwise.
  */
-export async function traceByMediaUpload(filePath: string, options: Options): Promise<Result | string | undefined> {
-  const file = path.join(path.resolve(process.cwd(), filePath || ''))
-  if (fs.existsSync(file)) {
-    try {
-      const paramaters = combineParams(options.cutBorders!, options.anilistInfo!, options.size!, options.mute!, options.apiKey)
-      const request = baseUrl + endpoints.search + paramaters
-      const response = await axios.post(request, fs.readFileSync(file))
-      return traceIt(response)
-    } catch (err) {
-      console.error(err)
-    }
-  } else {
-    return `${filePath} doesn't exist!`
+export async function traceFromFile(filePath: string, options: Options): Promise<Result | string | undefined> {
+  try {
+    const file = path.join(path.resolve(process.cwd(), filePath || ''))
+    if (!fs.existsSync(file)) return `${filePath} doesn't exist!`
+    const paramaters = combineParams(options.cutBorders!, options.anilistInfo!, options.size!, options.mute!, options.apiKey)
+    const request = baseUrl + endpoints.search + paramaters.slice(1)
+    const response = await axios.post(request, fs.readFileSync(file))
+    return traceIt(response)
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+/**
+ * Get source from Base64 string or data URL.
+ * @param {string} base64 - Base64 string or data URL.
+ * @param options - Search options.
+ * @returns {Promise<Result | string | undefined>} Returns `Result` if source exists, `string` if `url` not valid, and `undefined` otherwise.
+ */
+export async function traceFromBase64(base64: string, options: Options): Promise<Result | string | undefined> {
+  try {
+    const paramaters = combineParams(options.cutBorders!, options.anilistInfo!, options.size!, options.mute!, options.apiKey)
+    const request = baseUrl + endpoints.search + paramaters.slice(1)
+    const buff = Buffer.from(base64.includes(',') ? base64.split(',')[1] : base64, 'base64')
+    const response = await axios.post(request, buff)
+    return traceIt(response)
+  } catch (err) {
+    console.error(err)
   }
 }
 
