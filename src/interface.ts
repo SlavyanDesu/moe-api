@@ -2,7 +2,7 @@ export interface ResultData {
   /**
    * AniList data.
    */
-  anilist: AniList | number
+  anilist: number | AniList
 
   /**
    * Video file name.
@@ -12,7 +12,7 @@ export interface ResultData {
   /**
    * Anime episode.
    */
-  episode: number
+  episode: number | null
 
   /**
    * Start frame.

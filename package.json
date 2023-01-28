@@ -1,6 +1,6 @@
 {
-  "name": "trace.moe-wrapper",
-  "version": "0.3.5",
+  "name": "moe-api",
+  "version": "1.0.0",
   "description": "Search anime scene using trace.moe API.",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
