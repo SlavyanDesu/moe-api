@@ -51,7 +51,7 @@
   "license": "MIT",
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.49.0",
-    "@typescript-eslint/parser": "^5.49.0",
+    "@typescript-eslint/parser": "^8.28.0",
     "eslint": "^8.32.0",
     "rimraf": "^5.0.0",
     "ts-node": "^10.9.1",
