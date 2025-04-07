@@ -52,7 +52,7 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.49.0",
     "@typescript-eslint/parser": "^8.29.0",
-    "eslint": "^8.32.0",
+    "eslint": "^9.24.0",
     "rimraf": "^5.0.0",
     "ts-node": "^10.9.1",
     "tsconfig-to-dual-package": "^1.1.1",
